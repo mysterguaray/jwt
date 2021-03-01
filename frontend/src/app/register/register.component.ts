@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { FormGroup, FormControl } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -18,7 +19,8 @@ export class RegisterComponent {
 
   constructor(
     private fb: FormBuilder,
-    private http: HttpClient
+    private http: HttpClient,
+    private router: Router
     ) { }
 
   ngOnInit(): void {
@@ -28,7 +30,8 @@ export class RegisterComponent {
     //console.log(this.profileForm.getRawValue());
     this.http.post('http://127.0.0.1:8000/api/register', this.profileForm.getRawValue())
     .subscribe(res => {
-      console.log(res);
+      //console.log(res);
+      this.router.navigate(['/login'])
   });
   }
 }
